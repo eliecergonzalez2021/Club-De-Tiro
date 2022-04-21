@@ -1,1 +1,9 @@
-@import " ";
+
+$primary: rgb(255, 201, 23);
+
+$secondary: rgb(63, 63, 67);
+
+$dark: rgb(3, 3, 3);
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"

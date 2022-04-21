@@ -1,25 +1,32 @@
 {{!-- navbar --}}
-  <nav class="navbar navbar-expand-lg bg-secondary navbar-dark sticky-top py-lg-0 px-lg-5 wow fadeIn"
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top py-lg-0 px-lg-5 wow fadeIn"
     data-wow-delay="0.1s">
-    <a href="/" class="navbar-brand ms-4 ms-lg-0">
-      <h1 class="mb-0 text-primary text-uppercase">
-        <i class=""></i>FOGUEO SHOOTING
+    <a class="navbar-brand" href="/"><img class="imglogo" src="/img/logo.jpg" alt="logo"/></a>
+      <h1 class="mb-0 text-info text-uppercase">
+        <a href="/" class="titulo-pagina nav-item nav-link active">FOGUEO SHOOTING</a>
+        </a>
+            
       </h1>
+      
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="#" class="nav-item nav-link active">Inicio</a>
-        <a href="#" class="nav-item nav-link">Intructores</a>
-        <a href="#" class="nav-item nav-link">Galeria</a>
-        <a href="#" class="nav-item nav-link">Contacto</a>
-        <a href="/registrar" class="nav-item nav-link">Iniciar Sesion/registrate</a>
+        <a href="#Inicio" class="nav-item nav-link active">Inicio</a>
+        <a href="#Intructores" class="nav-item nav-link">Intructores</a>
+        <a href="#Galeria" class="nav-item nav-link">Galeria</a>
+        <a href="#Contacto" class="nav-item nav-link">Contacto</a>
+        <a href="/iniciosesion" class="nav-item nav-link">Iniciar Sesion</a>
+        <a href="/registrar" class="nav-item nav-link">registrate</a>
       </div>
+    
     </div>
   </nav>
-  {{!-- carousel --}}
+<!--fin navbar-->
+
+  <!-- carousel -->
    <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
   <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -40,7 +47,8 @@
               </div>
               <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
                   <div class="mx-sm-5 px-5" style="max-width: 900px;">
-                      <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">Con los mejores intructores del universo</h1>
+                      <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">Quieres tener una experiencia fenomenal</h1>
+                      <h4 class="text-white text-uppercase mb-4 animated slideInDown"><i class="fa fa-map-marker-alt text-primary me-3"></i>Campo de tiro Fogueo Shooting</h4>
                   </div>
               </div>
           </div>
@@ -68,6 +76,338 @@
       </button>
   </div>
 </div>
+<!-- Inicio Intruccion elite  -->
+    <div class="container-xxl py-5">
+      <div class="container">
+          <div class="row g-5">
+              <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                  <div class="d-flex flex-column">
+                      <img class="img-fluid w-75 align-self-end" src="img/Capa3.png" alt="">
+                      <div class="w-50 bg-secondary p-5" style="margin-top: -25%;">
+                          <h1 class="text-uppercase text-primary mb-3">35 Años</h1>
+                          <h2 class="text-uppercase text-light mb-0">Experiencia</h2>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                  <div class="video-fondo3">
+                  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Xii9_oWQ7HY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+                  <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
+                  <div class="row g-4">
+                      <div class="col-md-6">
+                          <h3 class="text-uppercase mb-3">Since 1990</h3>
+                          <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
+                      </div>
+                      <div class="col-md-6">
+                          <h3 class="text-uppercase mb-3">1000+ clients</h3>
+                          <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- About End -->
+  <!-- Service Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-uppercase" id="Galeria">GALERIA</h1>
+        </div>
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 7.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 1-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal1"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 7.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 1-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 8.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 2-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal2"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 8.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 2-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 9.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 3-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal3"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 9.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 3-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 7.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 4-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal4"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 7.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 4-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 7.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 5-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal5"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 7.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 5-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item position-relative overflow-hidden bg-dark d-flex h-100 p-5 ps-0">
+                    <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center">
+                        <img class="img"  src="/img/Capa 7.png" alt="">
+                    </div>
+                    <div class="ps-4">
+                        <!-- modal 6-->
+                        <button type="button" class="btn btn-square" data-bs-toggle="modal" data-bs-target="#modal6"><i class="fa fa-plus text-primary"></i></button>
+                        <div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <img class="img"  src="/img/Capa 7.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal 6-->
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-uppercase text-light" id="Intructores">INSTRUCTORES</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="imgs-capa img-fluid" src="/img/Capa3.png" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i>Agendar</a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="Membresia-fondo1 bg-secondary text-center p-4">
+                        <h5 class="text-uppercase text-light">Keane reaves</h5>
+                        <span class="text-primary">Legendario</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="imgs-capa img-fluid" src="/img/Capa 4.png" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i>Agendar</a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-secondary text-center p-4">
+                        <h5 class="text-uppercase text-light">Lucas botkin</h5>
+                        <span class="text-primary">Maestro</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="imgs-capa img-fluid" src="/img/Capa 5.png" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i>Agendar</a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-secondary text-center p-4">
+                        <h5 class="text-uppercase text-light">Clint barton</h5>
+                        <span class="text-primary">Aprendiz</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="imgs-capa img-fluid" src="/img/Capa3.png" alt="">
+                        <div class="team-social">
+                            <a class="btn btn-" href=""><i class=""></i>Agendar</a>
+                        </div>
+                    </div>
+                    <div class="bg-secondary text-center p-4">
+                        <h5 class="text-uppercase text-light">Experto recomendado</h5>
+                        <span class="text-primary">Inicial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+<!-- Working Hours Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="h-100">
+                    <img class="img-fluid h-100" src="img/Capa 19.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <div class="bg-secondary h-100 d-flex flex-column justify-content-center p-5">
+                    <p class="d-inline-flex bg-dark text-primary py-1 px-4 me-auto">LISTA DE PRECIOS</p>
+                    <h1 class="text-uppercase text-light mb-4">NUESTROS PRECIOS</h1>
+                    <div>
+                        <div class="d-flex justify-content-between border-bottom py-2">
+                            <h6 class="text-uppercase text-light mb-0">LEGENDARIO</h6>
+                            <span class="text-uppercase text-primary">$350.000</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom py-2">
+                            <h6 class="text-uppercase text-light  mb-0">MAESTRO</h6>
+                            <span class="text-uppercase text-primary">$260.000</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom py-2">
+                            <h6 class="text-uppercase text-light  mb-0">APRENDIZ</h6>
+                            <span class="text-uppercase text-primary">$195.000</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom py-2">
+                            <h6 class="text-uppercase text-light mb-0">INICIAL</h6>
+                            <span class="text-uppercase text-primary">$120.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Working Hours End -->
+
+<!-- Footer Start -->
+<div class="container-fluid bg-secondary footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-uppercase text-light mb-4" id="Contacto">CONTACTO</h4>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-map-marker-alt text-primary"></span>
+                    </div>
+                    <span>123 Street, New York, USA</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-phone-alt text-primary"></span>
+                    </div>
+                    <span>+012 345 67890</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-envelope-open text-primary"></span>
+                    </div>
+                    <span>info@example.com</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-uppercase text-light mb-4">Puntos de interes</h4>
+                <a class="btn btn-link" href="">Registro de armas</a>
+                <a class="btn btn-link" href="">Reglas</a>
+                <a class="btn btn-link" href="">IPCS Chile</a>
+                <a class="btn btn-link" href="">Tiro de defensa</a>
+                <a class="btn btn-link" href="">Support</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-primary text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#">FOGUEO SHOOTING</a>, TODOS LOS DERECHOS RESERVADOS PARA EL PROYECTO FINAL DE DESAFIO LATAM
+                </div>
+                <div class="col-md-6 text-center text-primary text-md-end">
+
+                    <br>VICTOR MOLINA: <a class="border-bottom" href="https:" target="_blank">LINK</a>
+                    <br>ELIECER GONZALEZ: <a class="border-bottom" href="https:" target="_blank">LINK</a>
+                    <br>MIXZIO GONZALEZ: <a class="border-bottom" href="https:" target="_blank">LINK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+
 
 <from class="" action="/api/v1/login">
     <h3></h3>

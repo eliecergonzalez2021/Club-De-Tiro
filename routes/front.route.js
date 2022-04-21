@@ -5,8 +5,9 @@ router.get('/', (req, res)=>{
 res.render('inicio.hbs')
 })
 
-router.get('/registro',(req, res)=>{
+router.get('/registrar',(req, res)=>{
     res.render('registrar.hbs')
 })
+
 
 module.exports = router

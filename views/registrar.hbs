@@ -14,7 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="#" class="nav-item nav-link active">Inicio</a>
+        <a href="/" class="nav-item nav-link active">Inicio</a>
         <a href="#" class="nav-item nav-link">Intructores</a>
         <a href="#" class="nav-item nav-link">Galeria</a>
         <a href="#Contacto" class="nav-item nav-link active">Contacto</a>
@@ -38,53 +38,55 @@
 					<!-- Contact Start -->
 					<div class="form-bg">
 						<div class="container">
-							<div class="row g-4">
+							<div class="row">
 								<div class="col-md-offset-3 col-md-12">
 									<div class="form-container">
-										<h3 class="title">Registrar</h3>
-										<form class="contenedor-formulario form-horizontal">
-											<div class="form-group"><label>Nombre</label>
-											<input type="text"
-													class="form-control" placeholder="Nombre de usuario">
+										<h3 class="title">Registrate</h3>
+										<form class="form-horizontal">
+											<div class="form-group">
+												<label>Nombre</label>
+												<input type="text" class="form-control" placeholder="Nombre" name="nombre">
 											</div>
-											<div class="form-group"><label>Apellido</label>
-											<input type="text"
-													class="form-control" placeholder="Nombre de usuario">
+											<div class="form-group">
+												<label>Apellido</label>
+												<input type="email" class="form-control" placeholder="Apellido" name="apellido">
+											</div>
+											<div class="form-group">
+												<label>Contraseña</label>
+												<input type="password" class="form-control" placeholder="Contraseña" name="contraseña">
+											</div>
+											<div class="form-group">
+												<label>Confirma Contraseña</label>
+												<input type="password" class="form-control" placeholder="Confirma Contraseña" name="contraseña2">
 											</div>
 											<div class="form-group">
 												<label>Email</label>
-												<input type="email" class="form-control" placeholder="Ingrese Email">
+												<input type="email" class="form-control" placeholder="email" name="email">
 											</div>
 											<div class="form-group">
-												<label>Confirmar Email</label>
-												<input type="email" class="form-control" placeholder="Ingrese Email">
+												<label>Confirma Email</label>
+												<input type="email" class="form-control" placeholder="Confirma email" name="email2">
 											</div>
-											<div class="form-group">
-												<label>Password</label>
-												<input type="password" class="form-control" placeholder="Contraseña">
-											</div>
-											<div class="form-group">
-												<label>Confirm Password</label>
-												<input type="password" class="form-control"
-													placeholder="Confirmar contraseña">
-											</div>
-											<h4 class="sub-title"></h4>
+											
 											<div class="form-group">
 												<label>RUT</label>
-												<input type="text" class="form-control" placeholder="RUT">
+												<input type="text" class="form-control" placeholder="Rut" name="rut">
 											</div>
 											<div class="form-group">
-												<label>Numero de contacto</label>
-												<input type="text" class="form-control"
-													placeholder="Numero de contacto">
+												<label>Cursos</label>
+												<select class="form-control">
+													<option value="paris">Inicial</option>
+													<option value="CLINT BARTON">CLINT BARTON /<b>APRENDIZ</b></option>
+													<option value="new york">LUCAS BOTKIN / MAESTRO</option>
+													<option value="new york">KEANE REAVES / LEGENDARIO</option>
+												</select>
 											</div>
 											<div class="check-terms">
 												<input type="checkbox" class="checkbox">
-												<span class="check-label">Acepta los terminos y condiciones </span>
+												<span class="check-label">Terminos y Condiciones</span>
 											</div>
-											<span class="signin-link">Si ya tienes cuenta puedes iniciar sesion <a
-													href="/iniciarsesion">Aqui</a></span>
-											<button class="btn signup">Crear cuenta</button>
+											<span class="signin-link">ya tienes una cuenta? <a href="/iniciarsesion">Iniciar sesión</a></span>
+											<button class="btn signup">Crear Cuenta</button>
 										</form>
 									</div>
 								</div>

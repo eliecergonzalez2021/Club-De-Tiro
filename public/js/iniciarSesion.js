@@ -1,4 +1,4 @@
-const formulario = document.getElementById('formularioRegister')
+const formulario = document.getElementById('formularioLogin')
 
 
 formulario.addEventListener('submit', async(e) => {
@@ -16,7 +16,7 @@ formulario.addEventListener('submit', async(e) => {
         const data = await res.json()
     
 
-        window.location.href = "/"
+        window.location.href = "/usuario"
 
     }catch(error){
         console.log(error)

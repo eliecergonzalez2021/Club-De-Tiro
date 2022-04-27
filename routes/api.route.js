@@ -2,21 +2,35 @@ const express = require("express");
 const {
     getSocios,
     getInstructores,
-    postSocios,
     getLogin,
+    postSocios,
     putSocio,
+    deleteSocio
 } = require("../controller/socio.controller");
 const { requireAuth } = require("../middlewares/requireAuth");
 const router = express.Router();
+
 //GET
+
 router.get("/socio", getSocios);
+
 router.get("/instructor", getInstructores);
-router.post("/login", getLogin);
+
 //POST
-router.post("/socio", postSocios);
-// PRUEBA MIDDLEWARES
-router.get('/prueba', requireAuth, (req, res) => {
-    res.send('casi')
-})
-router.put('/editar',putSocio)
+
+router.post("/iniciarsesion", getLogin);
+
+router.post("/registrar", postSocios);
+
+
+// PRUEBAS
+
+router.put('/usuario',putSocio);
+
+router.get('/prueba',requireAuth,(res,req)=>{
+    res.send('listo')
+});
+
+router.delete('/delete',deleteSocio)
+
 module.exports = router;

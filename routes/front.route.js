@@ -1,5 +1,9 @@
 const express = require('express');
+const { requireAuth } = require('../middlewares/requireAuth');
 const router = express.Router();
+//=====================================================//
+
+// Ruta a Inicio
 router.get('/', (req, res)=>{
 res.render('inicio.hbs')
 })

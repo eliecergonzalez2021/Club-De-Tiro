@@ -1,15 +1,20 @@
 const jwt = require("jsonwebtoken");
+
 const requireAuth = (req, res, next) => {
     try {
+
         console.log(req.headers);
+
+
+
         if (!req.headers?.authorization) {
             throw new Error("No existe el token");
         }
 
+
         const token = req.headers.authorization.split(" ")[1];
-        console.log(
-            token
-        );
+        console.log( token );
+
 
         if (!token) {
             throw new Error("Formato no válido utilizar Bearer");

@@ -22,4 +22,4 @@ routes.load(app)
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`puerto 😎👍 http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`puerto activo ༼ つ ◕_◕ ༽つ (☞ﾟヮﾟ)☞  http://localhost:${PORT} ☜(ﾟヮﾟ☜)`))

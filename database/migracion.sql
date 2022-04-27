@@ -1,7 +1,11 @@
--- CREACION TABLA REGISTRAR SOCIO
+
+DROP EXTENSION IF EXISTS pgcrypto;
 
 DROP TABLE IF EXISTS curso,socio,admi;
 
+-- habilitar pgcrypto;
+
+CREATE EXTENSION pgcrypto;
 
 -- CREACION TABLA REGISTRAR curso
 
@@ -36,13 +40,10 @@ CREATE TABLE admi (
 
 
 --llenar datos para prueba de socio
-INSERT INTO socio(rut,nombre,apellido,email,password)VALUES('20238277-0','victor','molina','prueba@gmail.com',1212);
+INSERT INTO socio(rut,nombre,apellido,email,password)VALUES('10.123.123-1','User','prueba','socio@test.cl', crypt('1212', gen_salt('bf')) );
  
---llenar datos para prueba de curso
-INSERT INTO curso(nombre,email,curso)VALUES('pedrito','prueba@gmail.com','pistola de agua');
-
 --llenar datos para prueba de administrador
-INSERT INTO admi(email,password)VALUES('prueba@gmail.com',1212);
+INSERT INTO admi(email,password)VALUES('admin@fsclub.cl',1313);
 
 -- llenar curso 
 INSERT INTO curso(nombre,email,curso)VALUES('Tio Harold','harold@fsclub.cl','inicial');

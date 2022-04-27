@@ -10,13 +10,15 @@ formulario.addEventListener('submit', async(e) => {
 
         const res = await fetch('/api/v1/iniciarsesion', {
             method: 'post',
-            body: formData
+            body: formData,
+            credentials: 'same-origin'
         })
 
         const data = await res.json()
-    
 
-        window.location.href = "/usuario"
+        window.localStorage.setItem("token", data.token)
+
+        window.location.href = `/usuario`
 
     }catch(error){
         console.log(error)

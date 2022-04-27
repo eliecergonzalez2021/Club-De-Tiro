@@ -12,6 +12,10 @@ const router = express.Router();
 
 //GET
 
+router.get("/ejemplo", (req, res) => {
+    res.send(req.user.rut)
+})
+
 router.get("/socio", getSocios);
 
 router.get("/instructor", getInstructores);

@@ -99,7 +99,6 @@ const postSocios = async(req, res) => {
 
 const getLogin = async(req, res) => {
     const { email, password } = req.body;
-    console.log("🚀 ~ file: socio.controller.js ~ line 102 ~ getLogin ~  req.body",  req.body)
     
     try {
         // validar que los campos no esten vacio
@@ -111,7 +110,6 @@ const getLogin = async(req, res) => {
 
         // ver si email existe en DB
         const respuesta = await getSocioLoginDB(email);
-        console.log("🚀 ~ file: socio.controller.js ~ line 114 ~ getLogin ~ respuesta", respuesta)
     
 
         const { socio } = respuesta;
@@ -130,17 +128,13 @@ const getLogin = async(req, res) => {
             throw new Error({ res: "la contraseña incorrecta" });
         }
 
-        // generar JWT
-
         const payload = { rut: respuesta.rut };
-        const token = jwt.sign(payload, process.env.JWT_SECRET, {
-            expiresIn: "1h",
-        });
+    
 
         // llamamos el socio y el token
 
-        console.log(`TOKEN : ${token}`);
-        return res.json({ ok: true,token: token });
+        res.login(payload);
+        return res.loginApi(payload);
 
     } catch (error) {
         console.log(error);
@@ -148,11 +142,13 @@ const getLogin = async(req, res) => {
     }
 };
 
-//editar socio 
+//editar socio agregar fecha y curso 🟢
 
 const putSocio = async (req, res) => {
-    const{fecha,curso,rut}=req.body   
+    const{fecha,curso}=req.body   
     console.log( req.body)
+    const rut = req.user.rut
+    console.log(rut)
 
     try {
 
@@ -163,15 +159,19 @@ const putSocio = async (req, res) => {
             throw new Error("campos vacios")
         }
 
-        // ver si rut existe en DB
+        // ver cereficar curso
 
         const verificador = await getCursoDB(curso);
+        
+        //sacamos el id
+
         const {cursoDB}=verificador
+
         const id = cursoDB.id
 
         // put
         
-        const respuesta = await putSocioDB(fecha,id,rut)
+        const respuesta = await putSocioDB(fecha, id, rut)
 
        res.json({ msg: "se actualizo", ok: respuesta.ok });
     

@@ -20,14 +20,18 @@ if (process.env.DATABASE_URL) opt.ssl = { rejectUnauthorized: false };
 const pool = new Pool(opt);
 //=====================================================================================================================================================================
 
-//====== GET =========
+//==== SOCIO =========================================================
+
+//====== GET =========================================================
+
+
 //llamamos la tabla socio
 
 const getSocioDB = async() => {
     const client = await pool.connect();
 
     const query = {
-        text: "SELECT rut,nombre,apellido,email FROM socio",
+        text: "SELECT rut,nombre,apellido,email FROM Socio",
     };
     try {
         const respuesta = await client.query(query);
@@ -151,7 +155,9 @@ const getCursoDB = async (curso)=>{
     }
 }
 
-//========= POST ============
+//========= POST =========================================================
+
+
 //añedir POST a socio
 
 const postSocioDB = async(rut, nombre, apellido, email, hash) => {
@@ -190,9 +196,9 @@ const postSocioDB = async(rut, nombre, apellido, email, hash) => {
     }
 };
 
+//========== PUT =========================================================
 
 
-//========== PRUEBA ==========
 // editar socio
 
 const putSocioDB=async (fecha,curso,rut)=>{
@@ -219,14 +225,83 @@ const putSocioDB=async (fecha,curso,rut)=>{
     }
 }
 
+//======== PRUEBA =========================================================
+
+
+
+
+//==== ADMINN =========================================================
+
+//indentificar email de admi
+
+const getAdminDB= async(email) =>{
+    const client = await pool.connect();
+    const query = {
+        text: "SELECT * FROM admi  WHERE email =$1 ",
+        values: [email],
+    };
+
+    try {
+        const respuesta = await client.query(query);
+        return {
+            ok: true,
+            admi: respuesta.rows[0],
+        };
+    } catch (error) {
+        console.log(error);
+        if (error.code === "23505") {
+            return {
+                ok: false,
+                msg: error.message,
+            };
+        }
+    } finally {
+        client.release();
+    }
+}
+
+//llamamos al socio para mostrar en la tabla administrador ULR:/Admin
+
+const getSocioAdmiDB = async () => {
+    return pool.query("SELECT nombre,email,fecha,curso_fk,rut FROM Socio")
+    .then(res => res.rows)
+  };
+
+//editar fecha y hora en administrador
+const putAdmiDB= async (fecha,curso,email) => {
+  
+    const client = await pool.connect();
+    const values=[fecha,curso,email]
+    const query =  ( {
+        text: "UPDATE socio SET fecha = $1, curso_fk = $2 WHERE email = $3 RETURNING *",
+        values
+    })
+    try {
+        const respuesta = await client.query(query);
+        return {
+            ok: true,
+            socio: respuesta,
+        };
+    } catch (error) {
+        console.log(error);
+    return {
+            ok: false,
+            msg: error.message,
+        };
+    }finally{
+        client.release();
+    
+}
+}
+
 //borrar socio
 
-const deleteSocioDB = async (rut)=>{
+const deleteSocioDB = async (email)=>{
     const client = await pool.connect();
 
     const query = {
-      text: "DELETE FROM socio WHERE rut = $1 RETURNING*",
-      values: [rut],
+      text: "DELETE FROM socio WHERE email = $1 RETURNING*",
+      values: [email],
     };
     try {
       const respuesta = await client.query(query);
@@ -246,7 +321,7 @@ const deleteSocioDB = async (rut)=>{
     }
 }
 
-
+//==== MIGRACION =========================================================
 
 // crearmos migrarcion
 
@@ -271,5 +346,10 @@ module.exports = {
     postSocioDB,
     putSocioDB,
     deleteSocioDB,
+//==ADMIN===========
+    getSocioAdmiDB,
+    getAdminDB,
+    putAdmiDB,
+//===MIGRACION======
     migrar,
 };

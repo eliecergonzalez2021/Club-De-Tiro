@@ -12,7 +12,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="/" class="nav-item nav-link active">Inicio</a>
+        <a href="/perfilusuario" class="nav-item nav-link active">Perfil Socio</a>
+        <a href="/" class="nav-item nav-link active">Cerrar Sesion</a>
       </div>
         
     
@@ -35,53 +36,35 @@
 							<div class="row">
 								<div class="col-md-offset-3 col-md-12">
 									<div class="form-container">
-										<h3 class="title">Registrate</h3>
+										<h3 class="title">Edita los Datos de tu perfil</h3>
 										<form class="form-horizontal" id="formularioRegistrar">
+											
+												
+											
 											<div class="form-group">
-												<label>Nombre</label>
-												<input type="text" class="form-control" placeholder="Nombre" name="nombre">
-											</div>
-											<div class="form-group">
-												<label>Apellido</label>
-												<input type="text" class="form-control" placeholder="Apellido" name="apellido">
-											</div>
-											<div class="form-group">
-												<label>Contraseña</label>
-												<input type="password" class="form-control" placeholder="Contraseña" name="password">
-											</div>
-											<div class="form-group">
-												<label>Confirma Contraseña</label>
-												<input type="password" class="form-control" placeholder="Confirma Contraseña" name="password2">
-											</div>
-											<div class="form-group">
-												<label>Email</label>
+												<label>Nuevo Email</label>
 												<input type="email" class="form-control" placeholder="email" name="email">
 											</div>
 											<div class="form-group">
-												<label>Confirma Email</label>
+												<label>Confirma Nuevo Email</label>
 												<input type="email" class="form-control" placeholder="Confirma email" name="email2">
+											</div>
+											
+											<div class="form-group">
+												<label>Nueva Contraseña</label>
+												<input type="password" class="form-control" placeholder="Contraseña" name="password">
+											</div>
+
+											<div class="form-group">
+												<label>Confirma Nueva Contraseña</label>
+												<input type="password" class="form-control" placeholder="Confirma Contraseña" name="password2">
 											</div>
 											
 											<div class="form-group">
 												<label>RUT</label>
 												<input type="text" class="form-control" placeholder="Rut" name="rut">
 											</div>
-											<div class="form-group">
-												<label>Cuentas con alguna experiencia de tiro?</label>
-												<select class="form-control" name="experiencia">
-													<option value="SI">SI</option>
-													<option value="NO">NO</option>
-												</select>
-													
-											</div>
-											<div class="check-terms">
-												<input type="checkbox" class="checkbox">
-												<span class="check-label">Terminos y Condiciones</span>
-											</div>
-											<span class="signin-link">ya tienes una cuenta? <a href="/iniciarsesion">Iniciar sesión</a></span>
-											
-											<button class="btn signup" type="submit" data-bs-dismiss="toast">Crear Cuenta</button>
-
+											<button class="btn signup" type="submit">Editar Perfil</button>
 										</form>
 									</div>
 								</div>

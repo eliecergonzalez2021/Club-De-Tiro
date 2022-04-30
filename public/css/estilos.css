@@ -768,3 +768,7 @@ span {
         margin: 0 10px 15px;
     }
 }
+table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}

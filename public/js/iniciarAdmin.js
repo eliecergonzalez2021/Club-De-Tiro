@@ -14,9 +14,11 @@ formulario.addEventListener('submit', async(e) => {
         })
 
         const data = await res.json()
-    
 
-        window.location.href = "/"
+        window.localStorage.setItem("token", data.token)
+
+        window.location.href = `/Admin`
+
 
     }catch(error){
         console.log(error)

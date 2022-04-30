@@ -23,5 +23,5 @@ exports.load = (app) => {
 		express.static(path.join(__dirname, "../node_modules/bootstrap/dist"))
 	);
 
-	app.use(["/api/v1/usuario", "/usuario"], guardian);
+	app.use(["/api/v1/usuario", "/usuario", '/perfilusuario'], guardian);
 };

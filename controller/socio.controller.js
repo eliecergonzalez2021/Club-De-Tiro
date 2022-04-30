@@ -1,9 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 
-const { getSocioDB, getInstructorDB, postSocioDB, getSocioLoginDB, getSocioUpDB, putSocioDB, deleteSocioDB, getCursoDB,} = require("../database");
-//rut.js is d
-const { validate, format } = require('rut.js')
+const { getSocioDB, getInstructorDB, postSocioDB, getSocioLoginDB, getSocioUpDB, putSocioDB, deleteSocioDB, getCursoDB, getSocioAdmiDB, getAdminDB, putAdmiDB,} = require("../database");
+
+//rut.js 
+
+const { validate, format } = require('rut.js');
+const { resetWatchers } = require("nodemon/lib/monitor/watch");
 
 
 // leer tabla socio
@@ -146,17 +149,19 @@ const getLogin = async(req, res) => {
 
 const putSocio = async (req, res) => {
     const{fecha,curso}=req.body   
-    console.log( req.body)
+
     const rut = req.user.rut
-    console.log(rut)
 
     try {
 
         // validar campos del body
 
         if (!fecha?.trim()||!curso?.trim()) {
+
             console.log("campos vacios");
+
             throw new Error("campos vacios")
+
         }
 
         // ver cereficar curso
@@ -166,18 +171,146 @@ const putSocio = async (req, res) => {
         //sacamos el id
 
         const {cursoDB}=verificador
-
-        const id = cursoDB.id
-
+        
         // put
         
-        const respuesta = await putSocioDB(fecha, id, rut)
+        const respuesta = await putSocioDB(fecha,cursoDB.curso,rut)
 
-       res.json({ msg: "se actualizo", ok: respuesta.ok });
+        res.json({ msg: "se actualizo", ok: respuesta.ok });
+     
+    } catch (error) {
+
+        return res.status(400).json({
+          ok: false,
+          msg: error.message,
+
+        });
+    }  
     
-        
+};
+
+
+//=========ADMIN=============================
+
+//llamamos al admin para el login🟢
+
+const getadmin = async (req, res) => {
+    const { email, password } = req.body;
+    console.log("🚀 ~ file: socio.controller.js ~ line 251 ~ getadmin ~  req.body",  req.body)
+    
+    try {
+
+        // validar que los campos no esten vacio
+
+        if (!email?.trim() || !password?.trim()) {
+            console.log("campos vacios");
+            throw new Error("campos vacios");
+        }
+
+        // ver si email existe en DB
+        const respuesta = await getAdminDB(email);
+    
+
+        const { admi } = respuesta;
+        console.log("🚀 ~ file: socio.controller.js ~ line 267 ~ getadmin ~ admi", admi)
+  
+        if (!respuesta.ok) {
+            console.log('email incorrecto')
+            throw new Error("email incorrecto");
+        }
+
+        // ver si el password coincide con el pass del DB
+
+        const comparePassword = await bcryptjs.compare(password, admi.password);
+
+        if (!comparePassword) {
+            console.log("contraseña incorrecta");
+            throw new Error({ res: "la contraseña incorrecta" });
+        }
+/* 
+        const payload = { rut: respuesta.rut };
+    
+
+        // llamamos el socio y el token
+
+        res.login(payload);
+        return res.loginApi(payload); */
+
+        res.json({admi:admi.email})
+
     } catch (error) {
         console.log(error);
+        return res.status(400).json({ ok: false, msg: error.message });
+    }
+}
+
+// leer tabla socio para admi🟢
+
+const getSocioadmi = async (req, res) => {
+    
+    const p = await getSocioAdmiDB()
+    
+
+    try {
+        (rows => res.json({ok: true, socio: rows}))
+    } catch (error) {
+        (error => res.json({ok: false, msg: error})) 
+    }
+
+    
+};
+
+// actualizar fecha y curso 🟢
+const putAdmin = async (req, res) => {
+    const{fecha,curso,email,email2}=req.body;
+    console.log( fecha,curso,email,email2)
+    
+
+    try {
+
+        // validar campos del body
+
+        if (!fecha?.trim()||!curso?.trim()) {
+
+            console.log("campos vacios");
+
+            throw new Error("campos vacios")
+
+        }
+
+        if(email !== email2){
+            console.log("los email no coinciden")
+            throw new Error("los email no coinciden")
+        }
+
+        const SocioEmail = await getSocioLoginDB(email);
+    
+        if (!SocioEmail.ok) {
+
+            console.log('email incorrecto')
+
+            throw new Error("email incorrecto");
+        }
+
+        const { socio } = SocioEmail;
+
+       //llamamos al curso
+
+        const Cursoso = await getCursoDB(curso);
+        const{cursoDB}=Cursoso;
+
+
+        
+        // put
+        
+        const respuesta = await  putAdmiDB(fecha,cursoDB.curso,socio.email)
+
+       
+
+        return res.json({ msg: "se actualizo", ok: respuesta.ok });
+     
+    } catch (error) {
+
         return res.status(400).json({
           ok: false,
           msg: error.message,
@@ -190,45 +323,31 @@ const putSocio = async (req, res) => {
 //elimar socio 
 
 const deleteSocio = async (req, res) => {
-    const { rut } = req.body;
+    const { email,email2 } = req.body;
 
     try {
             // validar campos del body
 
-            if (!rut?.trim()) {
+            if (!email?.trim()||!email2?.trim()) {
                 console.log("campos vacios");
             }
 
-            //validacion de rut 
-
-            const validarRut = validate(rut)
-
-            if(validarRut === true){
-                console.log('valido')
+            //email
+            if(email !== email2){
+                throw new Error("email no coinciden")
             } 
 
-            if(validarRut !== true){
-                throw new Error("rut no valido")
-            } 
-            // editar el rut 
-
-            const formatoRut = format(rut)
-             
             // ver si rut existe en DB
 
-            const verificador = await getSocioUpDB(formatoRut);
+            const verificador = await getSocioLoginDB(email);
 
             const { socio } = verificador;
-
+           
             if (!verificador.ok) {
-                throw new Error("rut incorrecto");
+                throw new Error("email incorrecto");
             }
             
-            if (socio.rut !== formatoRut) {
-                throw new Error("No existe el rut registrado");
-            }
-
-            const respuesta = await deleteSocioDB(formatoRut);
+            const respuesta = await deleteSocioDB(email);
 
             res.json({ delete: "se elimino correctamente", msg: respuesta.ok });
 
@@ -242,12 +361,19 @@ const deleteSocio = async (req, res) => {
 }
 
 
+
 module.exports = {
+    
     getSocios,
     getInstructores,
     getLogin,
     postSocios,
     putSocio,
     deleteSocio,
+//=== ADMIN =====
+    getSocioadmi,
+    getadmin,
+    putAdmin,
+
     
 };

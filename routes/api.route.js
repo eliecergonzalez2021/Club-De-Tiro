@@ -5,36 +5,49 @@ const {
     getLogin,
     postSocios,
     putSocio,
-    deleteSocio
+    deleteSocio,
+    getSocioadmi,
+    getadmin,
+    putAdmin
 } = require("../controller/socio.controller");
 const { requireAuth } = require("../middlewares/requireAuth");
 const router = express.Router();
 
-//GET
+//============ GET ===============
 
 router.get("/ejemplo", (req, res) => {
     res.send(req.user.rut)
 })
-
 router.get("/socio", getSocios);
 
 router.get("/instructor", getInstructores);
 
-//POST
+router.get("/leer",getSocioadmi)
+
+//======== POST ==============
 
 router.post("/iniciarsesion", getLogin);
 
 router.post("/registrar", postSocios);
 
-
-// PRUEBAS
+//======== PUT ==============
 
 router.put('/usuario',putSocio);
+
+
+
+// PRUEBAS
 
 router.get('/prueba',requireAuth,(res,req)=>{
     res.send('listo')
 });
 
-router.delete('/delete',deleteSocio)
+//=========ADMIN===============
+
+router.post('/inciarAdmin',getadmin)
+
+router.put('/editarAdmin',putAdmin)
+
+router.delete('/eliminar',deleteSocio)
 
 module.exports = router;

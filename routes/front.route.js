@@ -28,7 +28,7 @@ router.get('/editarUsuario',(req, res)=>{
     res.render('editarUsuario.hbs')
 })
 
-// PERFIL USUARIO  === Esto lo saque del codigo del mixzio
+// PERFIL USUARIO
 router.get('/perfilusuario', (req, res)=>{
     const user = {rut:"12.123.123-4",nombre:"Mixzio Gonzalez", email:"m@gonzalez.cl",curso:"aprendiz",}
     res.render('perfilusuario.hbs', {...user})

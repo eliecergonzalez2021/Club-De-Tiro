@@ -1,7 +1,9 @@
 const {Router} = require('express');
+const { prueba } = require('../controller/socio.controller');
 const { getSocioAdmiDB } = require('../database');
 const router = Router();
-//=====================================================//
+
+//=========SOCIO===================================
 
 //Inicio
 router.get('/', (req, res)=>{
@@ -14,7 +16,7 @@ router.get('/registrar',(req, res)=>{
 })
 
 //INICIAR SESIÓN
-router.get('/iniciarsesion', (req, res)=>{
+router.get('/iniciarSesion', (req, res)=>{
     res.render('iniciarsesion.hbs')
 })
 
@@ -23,18 +25,12 @@ router.get('/usuario',(req, res)=>{
     res.render('usuario.hbs')
 })
 
-//EDITAR USUARIO
-router.get('/editarUsuario',(req, res)=>{
-    res.render('editarUsuario.hbs')
+// PARA AGREGAR FECHA Y HORA
+router.get('/editarsocio',(req, res)=>{
+    res.render('editarsocio.hbs')
 })
 
-// PERFIL USUARIO
-router.get('/perfilusuario', (req, res)=>{
-    const user = {rut:"12.123.123-4",nombre:"Mixzio Gonzalez", email:"m@gonzalez.cl",curso:"aprendiz",}
-    res.render('perfilusuario.hbs', {...user})
-})
-
-//======================================= 
+//=========ADMIN============================== 
 
 // INICIAR ADMIN
 router.get('/iniciarAdmin', (req, res)=>{
@@ -49,13 +45,36 @@ router.get('/Admin', async (req, res)=>{
 
 // EDITAR PERFIL ADMIN
 
-router.get('/AdmiEditar', (req, res)=>{
+router.get('/AdminEditar', (req, res)=>{
     res.render('adminEditar.hbs')
 })
 
 // ELIMINAR SOCIO ADMIN
 router.get('/eliminarSocio', (req, res)=>{
     res.render('AdminEliminar.hbs')
+})
+
+//===========prueba============================
+
+// PERFIL USUARIO
+
+router.get('/perfilusuario', (req, res)=>{
+    const user = {rut:"12.123.123-4",nombre:"mixzio", email:"m@gonzalez.cl",curso:"aprendiz",}
+    res.render('perfilusuario.hbs', {...user})
+})
+
+router.get('/editarperfil',(req, res)=>{
+    res.render('editarSocio.hbs')
+})
+
+router.get("/CerrarSesion",(req, res )=>{
+    res.render('CerrarSesion.hbs')
+})
+router.get("/registradoConExito",(req, res )=>{
+    res.render('registradoConExito.hbs')
+})
+router.get("/agendadoConExito",(req, res )=>{
+    res.render('agendadoConExito.hbs')
 })
 
 module.exports = router

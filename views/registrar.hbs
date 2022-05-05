@@ -4,8 +4,10 @@
     <a class="navbar-brand" href="/"><img class="imglogo" src="/img/logo.jpg" alt="logo"/></a>
       <h1 class="mb-0 text-info text-uppercase">
         <a href="/" class="titulo-pagina nav-item nav-link active">FOGUEO SHOOTING</a>
-        </a>   
+        </a>
+            
       </h1>
+      
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
@@ -13,13 +15,14 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
         <a href="/" class="nav-item nav-link active">Inicio</a>
+        <a href="/iniciarsesion" class="nav-item nav-link">Iniciar Sesion</a>
       </div>
-        
     
     </div>
   </nav>
 <!--fin navbar-->
 
+<!--End navbar-->
 <!-- carousel -->
 <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
 	<div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -47,19 +50,19 @@
 											</div>
 											<div class="form-group">
 												<label>Contraseña</label>
-												<input type="password" class="form-control" placeholder="Contraseña" name="password">
+												<input type="password" class="form-control" placeholder="Contraseña" name="password"  required minlength="4" maxlength="15">
 											</div>
 											<div class="form-group">
 												<label>Confirma Contraseña</label>
-												<input type="password" class="form-control" placeholder="Confirma Contraseña" name="password2">
+												<input type="password" class="form-control" placeholder="Confirma Contraseña" name="password2"  required minlength="4" maxlength="15">
 											</div>
 											<div class="form-group">
 												<label>Email</label>
-												<input type="email" class="form-control" placeholder="email" name="email">
+												<input type="email" class="form-control" placeholder="email" name="email"  required minlength="4" maxlength="25">
 											</div>
 											<div class="form-group">
 												<label>Confirma Email</label>
-												<input type="email" class="form-control" placeholder="Confirma email" name="email2">
+												<input type="email" class="form-control" placeholder="Confirma email" name="email2"  required minlength="4" maxlength="25">
 											</div>
 											
 											<div class="form-group">
@@ -74,11 +77,8 @@
 												</select>
 													
 											</div>
-											
 											<span class="signin-link">ya tienes una cuenta? <a href="/iniciarsesion">Iniciar sesión</a></span>
-											
-											<button class="btn signup" type="submit" data-bs-dismiss="toast">Crear Cuenta</button>
-
+											<button class="btn signup" type="submit">Crear Cuenta</button>
 										</form>
 									</div>
 								</div>
@@ -93,52 +93,61 @@
 </div>
 <!--carousel end-->
 
-<!-- Inicio Footer -->
-<div class="container-fluid bg-secondary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-	<div class="container py-5" id="#Contacto">
-		<div class="row g-5">
-			<div class="col-lg-4 col-md-6">
-				<h4 class="text-uppercase mb-4">CONTACTO</h4>
-				<div class="d-flex align-items-center mb-2">
-					<div class="btn-square bg-dark flex-shrink-0 me-3">
-						<span class="fa fa-map-marker-alt text-primary"></span>
-					</div>
-					<span>Fogueo shooting club de tiro</span>
-				</div>
-				<div class="d-flex align-items-center mb-2">
-					<div class="btn-square bg-dark flex-shrink-0 me-3">
-						<span class="fa fa-phone-alt text-primary"></span>
-					</div>
-					<span>+590000000</span>
-				</div>
-				<div class="d-flex align-items-center">
-					<div class="btn-square bg-dark flex-shrink-0 me-3">
-						<span class="fa fa-envelope-open text-primary"></span>
-					</div>
-					<span>fogueoshooting@fsclub.cl</span>
-				</div>
-			</div>
+<!-- inicio Footer -->
+<div class="container-fluid bg-secondary footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-uppercase text-light mb-4" id="Contacto">CONTACTO</h4>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-map-marker-alt text-primary"></span>
+                    </div>
+                    <span>Fogueo Shooting club de tiro</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-phone-alt text-primary"></span>
+                    </div>
+                    <span>+56900000</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="btn-square bg-dark flex-shrink-0 me-3">
+                        <span class="fa fa-envelope-open text-primary"></span>
+                    </div>
+                    <span>fogueoshooting@fsclub.cl</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-uppercase text-light mb-4">Puntos de interes</h4>
+                <a class="border-bottom btn btn-link" href="https://www.chileatiende.gob.cl/fichas/1015-inscripcion-de-armas-de-fuego" target="_blank">Registro de armas</a>
+                <a class="border-bottom btn btn-link" href="https://www.chileatiende.gob.cl/fichas/4506-autorizacion-de-transporte-de-armas-de-caza-y-deporte" target="_blank">Permiso para traslado de armas de Fuego</a>
+                <a class="border-bottom btn btn-link" href="https://fedenatfdn.cl/" target="_blank">Tiro deportivo Chile</a>
+                <a class="border-bottom btn btn-link" href="https://www.bcn.cl/leyfacil/recurso/control-de-armas" target="_blank">Control de armas</a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.8132475675534!2d-70.7065957842667!3d-33.375941301079315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c761232e84f9%3A0xcb331b0630eb0b4f!2sClub%20de%20Tiro%20Santiago%20Shooting%20Club!5e0!3m2!1ses-419!2scl!4v1651182269944!5m2!1ses-419!2scl" width="400" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-primary text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#">FOGUEO SHOOTING</a>, TODOS LOS DERECHOS RESERVADOS PARA EL
+                    PROYECTO FINAL DE DESAFIO LATAM
+                </div>
+                <div class="col-md-6 text-center text-primary text-md-end">
 
-		</div>
-	</div>
-	<div class="container">
-		<div class="copyright">
-			<div class="row">
-				<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-					&copy; <a class="border-bottom" href="#">FOGUEO SHOOTING</a>, TODOS LOS DERECHOS RESERVADOS PARA EL
-					PROYECTO FINAL DE DESAFIO LATAM
-				</div>
-				<div class="col-md-6 text-center text-md-end">
-
-					<br>VICTOR MOLINA: <a class="border-bottom" href="https:" target="_blank">LINK</a>
-					<br>ELIECER GONZALEZ: <a class="border-bottom" href="https:" target="_blank">LINK</a>
-					<br>MIXZIO GONZALEZ: <a class="border-bottom" href="https:" target="_blank">LINK</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <br>VICTOR MOLINA: <a class="border-bottom" href="https://github.com/tomasmolinaarias" target="_blank">LINK</a>
+                    <br>ELIECER GONZALEZ: <a class="border-bottom" href="https://github.com/eliecergonzalez2021" target="_blank">LINK</a>
+                    <br>MIXZIO GONZALEZ: <a class="border-bottom" href="https://github.com/MxzGnTh" target="_blank">LINK</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- Fin Footer -->
+<!-- fin Footer -->
 
 <!-- volver a inicio -->
 <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

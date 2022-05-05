@@ -1,379 +1,427 @@
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 
-const { getSocioDB, getInstructorDB, postSocioDB, getSocioLoginDB, getSocioUpDB, putSocioDB, deleteSocioDB, getCursoDB, getSocioAdmiDB, getAdminDB, putAdmiDB,} = require("../database");
+const {
+	postSocioDB,
+	getSocioLoginDB,
+	putSocioDB,
+	deleteSocioDB,
+	getCursoDB,
+	getSocioAdmiDB,
+	getAdminDB,
+	putAdmiDB,
+	putDataDB,
+	getDataDB,
+	
+	
+} = require("../database");
 
-//rut.js 
+//rut.js
 
-const { validate, format } = require('rut.js');
+const { validate, format } = require("rut.js");
 const { resetWatchers } = require("nodemon/lib/monitor/watch");
 
-
-// leer tabla socio
-
-const getSocios = async(_, res) => {
-    const respuesta = await getSocioDB();
-    console.log(respuesta);
-    res.json({ respuesta });
-};
-
-// leer tabla instructor
-
-const getInstructores = async(_, res) => {
-    const respuesta = await getInstructorDB();
-    console.log(respuesta);
-    res.json({ respuesta });
-};
+//====socio==========================
 
 // registrar socio 🟢
 
-const postSocios = async(req, res) => {
-    const { rut, nombre, apellido, email, password,password2,email2,experiencia } = req.body;
-    console.log("🚀 ~ file: socio.controller.js ~ line 29 ~ postSocios ~ req.body", req.body)
-    
-    try {
-
-    // validacion espacio en blanco
-    if (!nombre?.trim() || !apellido?.trim() || !password?.trim() || !password2?.trim() || !email?.trim()|| !email2?.trim()|| !rut?.trim()|| !experiencia?.trim() ) {
-        console.log("campos vacios")
-        throw new Error("campos vacios");
-        
-    }
-    // VALIDACION CONTRASEÑA
-
-    if(password !== password2){
-        console.log('contraseña no son iguales')
-        throw new Error("contraseña no son iguales");
-    }
-
-    //validacion de rut 
-
-    const validarRut = validate(rut)
-
-    if(validarRut !== true){
-        console.log('rut no valido')
-        throw new Error("rut no valido")
-    } 
-    // editar el rut 
-
-    const formatoRut = format(rut)
-
-    // validacion email
-    if(email !== email2){
-        console.log('los email no coinciden')
-        throw new Error("los email no coinciden")
-    }
+const postSocios = async (req, res) => {
+	const {
+		rut,
+		nombre,
+		apellido,
+		email,
+		password,
+		password2,
+		email2,
+		experiencia,
+	} = req.body;
 
 
-    // ENCRIPTAR LA CONTRASEÑA
+	try {
+		// validacion espacio en blanco
+		if (
+			!nombre?.trim() ||
+			!apellido?.trim() ||
+			!password?.trim() ||
+			!password2?.trim() ||
+			!email?.trim() ||
+			!email2?.trim() ||
+			!rut?.trim() ||
+			!experiencia?.trim()
+		) {
+			throw new Error("campos vacios");
+		}
+		// VALIDACION CONTRASEÑA
 
-    const salt = await bcryptjs.genSalt(10);
+		if (password !== password2) {
+			throw new Error("contraseña no son iguales");
+		}
 
-    const hash = await bcryptjs.hash(password, salt);
+		//validacion de rut
 
-    // insertamos datos
+		const validarRut = validate(rut);
 
-    const respuesta = await postSocioDB(formatoRut, nombre, apellido, email, hash);
-    
+		if (validarRut !== true) {
+			throw new Error("rut no valido");
+		}
+		// editar el rut
 
-    // crear token
+		const formatoRut = format(rut);
 
-    const payload = {
-        rut: respuesta.rut,
-    };
+		// validacion email
+		if (email !== email2) {
+			throw new Error("los email no coinciden");
+		}
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+		// ENCRIPTAR LA CONTRASEÑA
 
-    console.log(respuesta);
+		const salt = await bcryptjs.genSalt(10);
 
-    res.json({ 
-        actualizar:respuesta.ok,
-        token:token, 
-    }); 
+		const hash = await bcryptjs.hash(password, salt);
 
-    } catch (error) {
-        // error de validacion de rut
-        res.json ({ msg: error.message});
-    }
+		// insertamos datos
 
+		const respuesta = await postSocioDB(
+			formatoRut,
+			nombre,
+			apellido,
+			email,
+			hash
+		);
+
+		// crear token
+
+		const payload = {
+			rut: respuesta.rut,
+		};
+
+		const token = jwt.sign(payload, process.env.JWT_SECRET, {
+			expiresIn: 120,
+		});
+
+		console.log('registrado')
+
+		return res.json({
+			registro: respuesta.ok,
+			token: token,
+		});
+	} catch (error) {
+		// error de validacion de rut
+		res.json({ msg: error.message });
+	}
 };
 
 // login 🟢
 
-const getLogin = async(req, res) => {
-    const { email, password } = req.body;
+const getLogin = async (req, res) => {
+	const { email, password } = req.body;
+	try {
+		// validar que los campos no esten vacio
+
+		if (!email?.trim() || !password?.trim()) {
+			throw new Error("campos vacios");
+		}
+
+		// ver si email existe en DB
+		const respuesta = await getSocioLoginDB(email);
     
-    try {
-        // validar que los campos no esten vacio
-
-        if (!email?.trim() || !password?.trim()) {
-            console.log("campos vacios");
-            throw new Error("campos vacios");
-        }
-
-        // ver si email existe en DB
-        const respuesta = await getSocioLoginDB(email);
-    
-
         const { socio } = respuesta;
-  
-        if (!respuesta.ok) {
-            console.log('email incorrecto')
-            throw new Error("email incorrecto");
-        }
 
-        // ver si el password coincide con el pass del DB
+		if (!respuesta.ok) {
+			throw new Error("email incorrecto");
+		}
 
-        const comparePassword = await bcryptjs.compare(password, socio.password);
+		// ver si el password coincide con el pass del DB
 
-        if (!comparePassword) {
-            console.log("contraseña incorrecta");
-            throw new Error({ res: "la contraseña incorrecta" });
-        }
+		const comparePassword = await bcryptjs.compare(password, socio.password);
 
-        const payload = { rut: respuesta.rut };
-    
+		if (!comparePassword) {
+			throw new Error("la contraseña incorrecta");
+		}
 
-        // llamamos el socio y el token
+		//mandamos playload para el token para
 
-        res.login(payload);
-        return res.loginApi(payload);
+		const payload = {rut: respuesta.rut};
 
-    } catch (error) {
-        console.log(error);
-        return res.status(400).json({ ok: false, msg: error.message });
-    }
+		res.login(payload);
+        
+		res.loginApi(payload);
+		console.log('logeado')
+	} catch (error) {
+		console.log(error.message);
+		return res.status(400).json({ msg: error.message });
+	}
 };
 
 //editar socio agregar fecha y curso 🟢
 
 const putSocio = async (req, res) => {
-    const{fecha,curso}=req.body   
+	const { fecha, curso } = req.body;
 
-    const rut = req.user.rut
+	const rut = req.user.rut;
 
-    try {
+	try {
+		// validar campos del body
 
-        // validar campos del body
+		if (!fecha?.trim() || !curso?.trim()) {
+			console.log("campos vacios");
 
-        if (!fecha?.trim()||!curso?.trim()) {
+			throw new Error("campos vacios");
+		}
 
-            console.log("campos vacios");
+		// ver cereficar curso
 
-            throw new Error("campos vacios")
+		const verificador = await getCursoDB(curso);
 
-        }
+		//sacamos el id
 
-        // ver cereficar curso
+		const { cursoDB } = verificador;
 
-        const verificador = await getCursoDB(curso);
-        
-        //sacamos el id
+		// put
 
-        const {cursoDB}=verificador
-        
-        // put
-        
-        const respuesta = await putSocioDB(fecha,cursoDB.curso,rut)
+		const respuesta = await putSocioDB(fecha, cursoDB.curso, rut);
 
-        res.json({ msg: "se actualizo", ok: respuesta.ok });
-     
-    } catch (error) {
+		console.log("se actualizo curso y fecha");
 
-        return res.status(400).json({
-          ok: false,
-          msg: error.message,
+		res.json({ msg: "se actualizo", ok: respuesta.ok });
 
-        });
-    }  
-    
+	} catch (error) {
+		return res.status(400).json({
+			ok: false,
+			msg: error.message,
+		});
+	}
 };
 
+// editar socio datos 🟢
+const putdatos = async (req, res) => {
+	const{nombre,apellido,email,email2,password,password2}= req.body;
+	
+	const rut = req.user.rut;
 
+	try {
+		// validacion espacio en blanco
+		if (
+			!nombre?.trim() ||!apellido?.trim()||!email?.trim() ||!email2?.trim()||!password?.trim()||!password2?.trim()){
+				throw new Error("campos vacios");
+			};
+		
+		// validacion email
+		if (email !== email2) {
+			throw new Error("los email no coinciden");
+		}
+		// validacion email
+		if (password !== password2) {
+			throw new Error("las contraseña no coinciden");
+		}
+			// ENCRIPTAR LA CONTRASEÑA
+
+			const salt = await bcryptjs.genSalt(10);
+
+			const hash = await bcryptjs.hash(password, salt);
+	
+		// put
+	
+		const respuesta = await putDataDB(nombre,apellido,email, hash,rut);
+     
+		console.log("se actualizo los datos");
+
+		res.json({ msg: "se actualizo", ok: respuesta.ok });
+
+	} catch (error) {
+		return res.status(400).json({
+			ok: false,
+			msg: error.message,
+		});
+	}
+}
+
+// prueba
+
+const getSocioData = async(req, res)=>{
+	const rut = req.user.rut;
+    console.log(rut)
+	try {
+		const respuesta = await getDataDB(rut)
+        console.log(respuesta)
+		const{socio} = respuesta
+	
+		return res.json({socio})
+	} catch (error) {
+		
+	}
+}
+    
 //=========ADMIN=============================
 
 //llamamos al admin para el login🟢
 
 const getadmin = async (req, res) => {
-    const { email, password } = req.body;
-    console.log("🚀 ~ file: socio.controller.js ~ line 251 ~ getadmin ~  req.body",  req.body)
-    
-    try {
+	const { email, password } = req.body;
 
-        // validar que los campos no esten vacio
+	try {
+		// validar que los campos no esten vacio
 
-        if (!email?.trim() || !password?.trim()) {
-            console.log("campos vacios");
-            throw new Error("campos vacios");
-        }
+		if (!email?.trim() || !password?.trim()) {
+			throw new Error("campos vacios");
+		}
 
-        // ver si email existe en DB
-        const respuesta = await getAdminDB(email);
-    
+		// ver si email existe en DB
+		const admin = await getAdminDB(email);
 
-        const { admi } = respuesta;
-        console.log("🚀 ~ file: socio.controller.js ~ line 267 ~ getadmin ~ admi", admi)
-  
-        if (!respuesta.ok) {
-            console.log('email incorrecto')
-            throw new Error("email incorrecto");
-        }
+		const { admi } = admin;
 
-        // ver si el password coincide con el pass del DB
+		if (!admin.ok) {
 
-        const comparePassword = await bcryptjs.compare(password, admi.password);
+			throw new Error("email incorrecto");
+		}
 
-        if (!comparePassword) {
-            console.log("contraseña incorrecta");
-            throw new Error({ res: "la contraseña incorrecta" });
-        }
-/* 
-        const payload = { rut: respuesta.rut };
-    
+		// ver si el password coincide con el pass del DB
 
-        // llamamos el socio y el token
+		const comparePassword = await bcryptjs.compare(password, admi.password);
 
-        res.login(payload);
-        return res.loginApi(payload); */
+		if (!comparePassword) {
+			throw new Error("la contraseña incorrecta");
+		}
+		//mandamos el payload token
 
-        res.json({admi:admi.email})
+		const payload = { admi: admi.email };
 
-    } catch (error) {
-        console.log(error);
-        return res.status(400).json({ ok: false, msg: error.message });
-    }
-}
+		res.login(payload);
+
+		res.loginApi(payload);
+
+		console.log('ENTRO EL Admin')
+
+	} catch (error) {	
+		console.log(error);
+		return res.status(400).json({ ok: false, msg: error.message });
+	}
+};
 
 // leer tabla socio para admi🟢
 
 const getSocioadmi = async (req, res) => {
-    
-    const p = await getSocioAdmiDB()
-    
+	const p = await getSocioAdmiDB();
 
-    try {
-        (rows => res.json({ok: true, socio: rows}))
-    } catch (error) {
-        (error => res.json({ok: false, msg: error})) 
-    }
-
-    
+	try {
+		(rows) => res.json({ ok: true, socio: rows });
+	} catch (error) {
+		(error) => res.json({ ok: false, msg: error });
+	}
 };
 
 // actualizar fecha y curso 🟢
 const putAdmin = async (req, res) => {
-    const{fecha,curso,email,email2}=req.body;
-    console.log( fecha,curso,email,email2)
-    
+	const { fecha, curso, email, email2 } = req.body;
+	console.log(fecha, curso, email, email2);
 
-    try {
+	try {
+		// validar campos del body
 
-        // validar campos del body
+		if (!fecha?.trim() || !curso?.trim()) {
+			throw new Error("campos vacios");
+		}
 
-        if (!fecha?.trim()||!curso?.trim()) {
+		if (email !== email2) {
+			throw new Error("los email no coinciden");
+		}
 
-            console.log("campos vacios");
+		const SocioEmail = await getSocioLoginDB(email);
 
-            throw new Error("campos vacios")
+		if (!SocioEmail.ok) {
+			throw new Error("email incorrecto");
+		}
 
-        }
+		const { socio } = SocioEmail;
 
-        if(email !== email2){
-            console.log("los email no coinciden")
-            throw new Error("los email no coinciden")
-        }
+		//llamamos al curso
 
-        const SocioEmail = await getSocioLoginDB(email);
-    
-        if (!SocioEmail.ok) {
+		const Cursoso = await getCursoDB(curso);
+		const { cursoDB } = Cursoso;
 
-            console.log('email incorrecto')
+		// put
 
-            throw new Error("email incorrecto");
-        }
+		const respuesta = await putAdmiDB(fecha, cursoDB.curso, socio.email);
 
-        const { socio } = SocioEmail;
+		console.log('el admin actualizo el fecha curso ')
 
-       //llamamos al curso
+		return res.json({ msg: "se actualizo", ok: respuesta.ok });
 
-        const Cursoso = await getCursoDB(curso);
-        const{cursoDB}=Cursoso;
-
-
-        
-        // put
-        
-        const respuesta = await  putAdmiDB(fecha,cursoDB.curso,socio.email)
-
-       
-
-        return res.json({ msg: "se actualizo", ok: respuesta.ok });
-     
-    } catch (error) {
-
-        return res.status(400).json({
-          ok: false,
-          msg: error.message,
-
-        });
-    }  
-    
+	} catch (error) {
+		return res.status(400).json({
+			ok: false,
+			msg: error.message,
+		});
+	}
 };
 
-//elimar socio 
+//elimar socio 🟢
 
 const deleteSocio = async (req, res) => {
-    const { email,email2 } = req.body;
+	const { email, email2 } = req.body;
 
-    try {
-            // validar campos del body
+	try {
+		// validar campos del body
 
-            if (!email?.trim()||!email2?.trim()) {
-                console.log("campos vacios");
-            }
+		if (!email?.trim() || !email2?.trim()) {
+			throw new Error("campos vacio");
+		}
 
-            //email
-            if(email !== email2){
-                throw new Error("email no coinciden")
-            } 
+		//email
+		if (email !== email2) {
+			throw new Error("email no coinciden");
+		}
 
-            // ver si rut existe en DB
+		// ver si rut existe en DB
 
-            const verificador = await getSocioLoginDB(email);
+		const verificador = await getSocioLoginDB(email);
 
-            const { socio } = verificador;
-           
-            if (!verificador.ok) {
-                throw new Error("email incorrecto");
-            }
-            
-            const respuesta = await deleteSocioDB(email);
+		const { socio } = verificador;
 
-            res.json({ delete: "se elimino correctamente", msg: respuesta.ok });
+		if (!verificador.ok) {
+			throw new Error("email incorrecto");
+		}
 
-        } catch (error) {
-            console.log(error);
-            return res.status(400).json({
-                ok: false,
-                msg: error.message,
-            });
-        }
+		const respuesta = await deleteSocioDB(email);
+
+		console.log('el admin elimino un usuario')
+
+		res.json({ delete: "se elimino correctamente", msg: respuesta.ok });
+
+	} catch (error) {
+		console.log(error);
+		return res.status(400).json({
+			ok: false,
+			msg: error.message,
+		});
+	}
+};
+
+//=====BORRAR TOKEN=============
+
+//logout
+
+const logout = async (req, res) => {
+    return res
+    .clearCookie("token")
+    .status(200)
+    .redirect('/CerrarSesion');
+
 }
 
-
-
 module.exports = {
-    
-    getSocios,
-    getInstructores,
-    getLogin,
-    postSocios,
-    putSocio,
-    deleteSocio,
-//=== ADMIN =====
-    getSocioadmi,
-    getadmin,
-    putAdmin,
-
-    
+	getLogin,
+	getSocioData,
+	postSocios,
+	putSocio,
+	putdatos,
+	deleteSocio,
+	//=== ADMIN =====
+	getSocioadmi,
+	getadmin,
+	putAdmin,
+	//==token==
+    logout,
 };

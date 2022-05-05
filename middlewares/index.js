@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require("path");
 const fileUpload = require("express-fileupload");
-const { requireAuth } = require("./requireAuth");
 const cookieParser = require("cookie-parser");
-const { parsearToken, guardian } = require("./token");
+const { parsearToken, guardianSocio, guardianAdmin } = require("./token");
 
 exports.load = (app) => {
+	
 	app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(
@@ -23,5 +23,6 @@ exports.load = (app) => {
 		express.static(path.join(__dirname, "../node_modules/bootstrap/dist"))
 	);
 
-	app.use(["/api/v1/usuario", "/usuario", '/perfilusuario'], guardian);
+	app.use(["/api/v1/usuario", "/api/v1/editarsocio","/usuario","/perfilusuario","/editarsocio","/api/v1/perfilusuario"], guardianSocio);
+	app.use(["/Admin","/AdminEditar","/eliminarSocio","/api/v1/editarAdmin","/api/v1/eliminar"],guardianAdmin)
 };

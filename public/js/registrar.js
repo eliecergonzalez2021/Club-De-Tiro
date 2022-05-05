@@ -15,7 +15,7 @@ formulario.addEventListener('submit', async(e) => {
         const data = await res.json()
     
 
-        window.location.href = "/iniciarsesion"
+        window.location.href = "/registradoConExito"
 
     }catch(error){
         console.log(error)
